@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:online_test/data/modules/homescreen/views/home_screen_page.dart';
+import 'package:online_test/data/modules/homescreen/view.dart';
 
 import 'data/modules/binding.dart';
 

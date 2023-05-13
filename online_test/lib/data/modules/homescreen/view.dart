@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:online_test/data/models/blog.dart';
 import 'package:online_test/data/models/candidates.dart';
+import 'package:online_test/data/modules/binding.dart';
+import 'package:online_test/data/modules/blog/view.dart';
+import 'package:online_test/data/modules/candidates/view.dart';
 import 'package:online_test/data/modules/homescreen/controller/controller.dart';
-import 'package:online_test/data/modules/widget/common_list_view.dart';
+import 'package:online_test/data/modules/widget/common_list_view_layout.dart';
 import 'package:online_test/data/modules/widget/data_list_widget.dart';
 import 'package:online_test/util/debouncer.dart';
 import 'package:get/get.dart';
@@ -12,16 +15,16 @@ class HomeScreenPage extends GetView<HomeScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _searchController = TextEditingController();
+    TextEditingController searchController = TextEditingController();
     final Debouncer debouncer = Debouncer(milliseconds: 500);
 
-    return CommonListView(children: [
+    return CommonListViewLayout(children: [
       Padding(
         padding: const EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
         child: Column(
           children: [
             TextField(
-              controller: _searchController,
+              controller: searchController,
               decoration: const InputDecoration(
                   hintText: 'Search data',
                   hintStyle: TextStyle(color: Colors.grey),
@@ -70,7 +73,21 @@ class HomeScreenPage extends GetView<HomeScreenController> {
                     if (controller.shuffleList.isNotEmpty) {
                       return Column(
                         children: controller.shuffleList
-                            .map((element) => DataListWidget(datas: element))
+                            .map((element) => InkWell(
+                                onTap: () {
+                                  if (element is Candidate) {
+                                    Get.to(
+                                        () => CandidateView(
+                                              candidate: element,
+                                            ),
+                                        binding: ControllersBinding());
+                                  }
+                                  if (element is Blog) {
+                                    Get.to(() => BlogView(),
+                                        binding: ControllersBinding());
+                                  }
+                                },
+                                child: DataListWidget(datas: element)))
                             .toList(),
                       );
                     } else {
