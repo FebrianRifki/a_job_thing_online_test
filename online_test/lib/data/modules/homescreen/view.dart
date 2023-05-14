@@ -4,7 +4,7 @@ import 'package:online_test/data/models/candidates.dart';
 import 'package:online_test/data/modules/binding.dart';
 import 'package:online_test/data/modules/blog/view.dart';
 import 'package:online_test/data/modules/candidates/view.dart';
-import 'package:online_test/data/modules/homescreen/controller/controller.dart';
+import 'package:online_test/data/modules/homescreen/controller.dart';
 import 'package:online_test/data/modules/widget/common_list_view_layout.dart';
 import 'package:online_test/data/modules/widget/data_list_widget.dart';
 import 'package:online_test/util/debouncer.dart';
@@ -42,11 +42,12 @@ class HomeScreenPage extends GetView<HomeScreenController> {
               },
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.02,
             ),
             Obx(
               () {
-                if (controller.isErrorRequest.value == true) {
+                if (controller.isErrorCandidateRequest.value == true ||
+                    controller.isErrorBlogRequest.value == true) {
                   return AlertDialog(
                     title: const Text('Request Error'),
                     content:
@@ -64,11 +65,7 @@ class HomeScreenPage extends GetView<HomeScreenController> {
                   );
                 } else {
                   if (controller.isLoadingShuffelData.value == true) {
-                    return const SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: CircularProgressIndicator(),
-                    );
+                    return const LinearProgressIndicator();
                   } else {
                     if (controller.shuffleList.isNotEmpty) {
                       return Column(
@@ -83,7 +80,10 @@ class HomeScreenPage extends GetView<HomeScreenController> {
                                         binding: ControllersBinding());
                                   }
                                   if (element is Blog) {
-                                    Get.to(() => BlogView(),
+                                    Get.to(
+                                        () => BlogView(
+                                              blog: element,
+                                            ),
                                         binding: ControllersBinding());
                                   }
                                 },

@@ -32,7 +32,10 @@ class _CandidateViewState extends State<CandidateView> {
       children: [
         Obx(
           () {
-            if (candidateController.isErrorRequest.value == true) {
+            if (candidateController.isErrorEmailRequest.value == true ||
+                candidateController.isErrorAddressRequest.value == true ||
+                candidateController.isErrorCandidateStatusRequest.value ==
+                    true) {
               return AlertDialog(
                 title: const Text('Request Error'),
                 content:
@@ -51,15 +54,8 @@ class _CandidateViewState extends State<CandidateView> {
             } else {
               if (candidateController.isProcessingData.value == true) {
                 return const Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: Center(
-                    child: SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                );
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: LinearProgressIndicator());
               } else {
                 return Padding(
                   padding:

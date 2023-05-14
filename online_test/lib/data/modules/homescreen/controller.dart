@@ -10,7 +10,9 @@ class HomeScreenController extends GetxController {
   var listCandidate = [].obs;
   var blog = [].obs;
   var shuffleList = [].obs;
-  RxBool isErrorRequest = false.obs;
+  RxBool isErrorCandidateRequest = false.obs;
+  RxBool isErrorBlogRequest = false.obs;
+
   RxBool isLoadingShuffelData = false.obs;
   Provider provider = Provider();
 
@@ -22,30 +24,37 @@ class HomeScreenController extends GetxController {
 
   fetchCandidateData() async {
     var data = await provider.getListCandidate();
-    if (data.isNotEmpty) {
-      listCandidate.assignAll(data);
+    if (data != false) {
+      isErrorCandidateRequest.value = false;
+      if (data.isNotEmpty) {
+        listCandidate.assignAll(data);
+      }
     } else {
-      isErrorRequest.value = true;
+      isErrorCandidateRequest.value = true;
     }
     return listCandidate;
   }
 
   fetchBlogData() async {
     var data = await provider.getListBlog();
-    if (data.isNotEmpty) {
-      blog.assignAll(data);
+    if (data != false) {
+      isErrorBlogRequest.value = false;
+      if (data.isNotEmpty) {
+        blog.assignAll(data);
+      }
     } else {
-      isErrorRequest.value = true;
+      isErrorBlogRequest.value = true;
     }
     return blog;
   }
 
   void getAllData() async {
     isLoadingShuffelData.value = true;
-    var candidates = await fetchCandidateData();
-    var blogs = await fetchBlogData();
-    shuffleList.addAll(candidates);
-    shuffleList.addAll(blogs);
+    shuffleList.value = [];
+    await fetchCandidateData();
+    await fetchBlogData();
+    shuffleList.addAll(listCandidate);
+    shuffleList.addAll(blog);
     final random = Random();
     shuffleList.shuffle(random);
     isLoadingShuffelData.value = false;

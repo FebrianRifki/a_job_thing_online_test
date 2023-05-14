@@ -21,35 +21,46 @@ class CandidateController extends GetxController {
   List<CandidateStatus> candidateStatusList = [];
   List<Email> emailList = [];
   Provider provider = Provider();
-  RxBool isErrorRequest = false.obs;
+  RxBool isErrorEmailRequest = false.obs;
+  RxBool isErrorAddressRequest = false.obs;
+  RxBool isErrorCandidateStatusRequest = false.obs;
   RxBool isProcessingData = false.obs;
 
   fetchEmailList() async {
     var data = await provider.getListEmail();
-    if (data.isNotEmpty) {
-      emailList.assignAll(data);
+    if (data != false) {
+      isErrorEmailRequest.value = false;
+      if (data.isNotEmpty) {
+        emailList.assignAll(data);
+      }
     } else {
-      isErrorRequest.value = true;
+      isErrorEmailRequest.value = true;
     }
     return emailList;
   }
 
   fetchAdressList() async {
     var data = await provider.getListAddress();
-    if (data.isNotEmpty) {
-      addressList.assignAll(data);
+    if (data != false) {
+      isErrorAddressRequest.value = false;
+      if (data.isNotEmpty) {
+        addressList.assignAll(data);
+      }
     } else {
-      isErrorRequest.value = true;
+      isErrorAddressRequest.value = true;
     }
     return addressList;
   }
 
   fetchCandidateStatus() async {
     var data = await provider.getListCandidateStatus();
-    if (data.isNotEmpty) {
-      candidateStatusList.assignAll(data);
+    if (data != false) {
+      isErrorCandidateStatusRequest.value = false;
+      if (data.isNotEmpty) {
+        candidateStatusList.assignAll(data);
+      }
     } else {
-      isErrorRequest.value = true;
+      isErrorCandidateStatusRequest.value = true;
     }
     return candidateStatusList;
   }

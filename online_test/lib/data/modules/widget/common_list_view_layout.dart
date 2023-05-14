@@ -28,7 +28,10 @@ class _CommonListViewLayoutState extends State<CommonListViewLayout> {
                 icon: Icon(Icons.arrow_back, color: Colors.black),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              title: Text(widget.appbarTitle ?? ''),
+              title: Text(
+                widget.appbarTitle ?? '',
+                overflow: TextOverflow.ellipsis,
+              ),
               centerTitle: true,
             )
           : null,

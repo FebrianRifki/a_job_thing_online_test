@@ -22,7 +22,7 @@ class Provider {
             .toList();
         return candidates;
       } else {
-        return [];
+        return false;
       }
     } catch (e) {
       print(e);
@@ -42,7 +42,7 @@ class Provider {
             responseData.map((dynamic blog) => Blog.fromJson(blog)).toList();
         return blogs;
       } else {
-        return [];
+        return false;
       }
     } catch (e) {
       print(e);
@@ -63,7 +63,7 @@ class Provider {
             .toList();
         return addressList;
       } else {
-        return [];
+        return false;
       }
     } catch (e) {
       print(e);
@@ -83,7 +83,7 @@ class Provider {
             responseData.map((dynamic email) => Email.fromJson(email)).toList();
         return emailList;
       } else {
-        return [];
+        return false;
       }
     } catch (e) {
       print(e);
@@ -105,7 +105,7 @@ class Provider {
             .toList();
         return candidateStatusList;
       } else {
-        return [];
+        return false;
       }
     } catch (e) {
       print(e);

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:online_test/data/models/blog.dart';
 import 'package:online_test/data/models/candidates.dart';
 import 'package:get/get.dart';
-import 'package:online_test/data/modules/homescreen/controller/controller.dart';
+import 'package:online_test/data/modules/homescreen/controller.dart';
 
 class DataListWidget extends StatelessWidget {
   final homeScreenController = Get.find<HomeScreenController>();
