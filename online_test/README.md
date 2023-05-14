@@ -1,16 +1,18 @@
-# online_test
+#1. The architecture used in this project is MVC.
 
-A new Flutter project.
+#2. The libraries I used are:
+ - "get" for state management.
+ - "url_launcher" to open WhatsApp and email.
+ - "http" to consume APIs from endpoints.
 
-## Getting Started
+#3 It took around 20 hours, with 8 hours of work per day.
 
-This project is a starting point for a Flutter application.
+#4 If I have additional time, I will add a feature to sort the data based on type, so the data display will not be random and more visually appealing. Perhaps adding a floating header feature would also be nice, so when users scroll down to read an article, they can still see the header title of the blog.
 
-A few resources to get you started if this is your first Flutter project:
+#5 The part where we press the email and are directed straight to the email application with the placeholder "Hi i am MK company".
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#6 Features on the home screen include displaying random data, data search, and handling errors.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#7 I think this is a very good test. Besides testing how we display data from APIs, it also sharpens our logic due to the requirements that need to be met. If I may add, having a requirement to design, such as displaying a list of blogs in a view, would be more challenging.
+
+#8 This is a difficult question to answer. Sometimes, if we pursue quantity, quality has to be sacrificed, and vice versa. However, I would choose quality.
